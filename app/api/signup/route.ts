@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -17,6 +17,16 @@ export async function POST(req: NextRequest) {
 
   if (!EMAIL_RE.test(email)) {
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
+  }
+
+  let supabase;
+  try {
+    supabase = getSupabase();
+  } catch {
+    return NextResponse.json(
+      { error: "Signups are temporarily unavailable. Try again shortly." },
+      { status: 500 }
+    );
   }
 
   const { error } = await supabase.from("subscribers").insert({
