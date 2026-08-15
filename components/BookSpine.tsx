@@ -32,7 +32,11 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
       type="button"
       data-slug={book.slug}
       onClick={(e) => onSelect(book, e.currentTarget)}
-      aria-label={`Read ${book.title} by Lucy Chivers`}
+      aria-label={
+        book.comingSoon
+          ? `${book.title} — coming soon`
+          : `Read ${book.title} by Lucy Chivers`
+      }
       className="group relative shrink-0 cursor-pointer select-none outline-none"
       style={{
         width: `${book.bookWidthRem}rem`,
@@ -77,7 +81,7 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
           }}
         />
 
-        {/* front cover */}
+        {/* front cover — real art, or a "coming soon" placeholder for unannounced books */}
         <span
           className="absolute inset-0 overflow-hidden rounded-[2px]"
           style={{
@@ -87,14 +91,35 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
               : "5px 12px 18px rgba(0,0,0,0.45)",
           }}
         >
-          <Image
-            src={book.coverImage}
-            alt={`${book.title} cover`}
-            fill
-            sizes="(max-width: 640px) 40vw, 200px"
-            className="object-cover"
-            priority={book.bookNumber === 1}
-          />
+          {book.coverImage ? (
+            <Image
+              src={book.coverImage}
+              alt={`${book.title} cover`}
+              fill
+              sizes="(max-width: 640px) 40vw, 200px"
+              className="object-cover"
+              priority={book.bookNumber === 1}
+            />
+          ) : (
+            <span
+              className="flex h-full w-full flex-col items-center justify-between p-4 text-center"
+              style={{ background: `linear-gradient(160deg, ${accent} 0%, #000 140%)` }}
+            >
+              <span className="mt-2 text-[0.6rem] uppercase tracking-[0.25em] text-parchment/60">
+                {book.bookLabel}
+              </span>
+              <span className="flex flex-col items-center gap-2">
+                <span className="h-px w-8 bg-parchment/40" />
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/90">
+                  Coming
+                  <br />
+                  Soon
+                </span>
+                <span className="h-px w-8 bg-parchment/40" />
+              </span>
+              <span className="mb-1 text-[0.6rem] italic text-parchment/60">Lucy Chivers</span>
+            </span>
+          )}
         </span>
       </span>
     </button>

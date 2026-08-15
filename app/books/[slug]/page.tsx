@@ -54,20 +54,42 @@ export default async function BookPage({
               className="relative aspect-[5/8] w-full overflow-hidden rounded-sm shadow-2xl"
               style={{ boxShadow: `0 20px 40px rgba(0,0,0,0.6)` }}
             >
-              <Image
-                src={book.coverImage}
-                alt={`${book.title} cover`}
-                fill
-                sizes="280px"
-                className="object-cover"
-                priority
-              />
+              {book.coverImage ? (
+                <Image
+                  src={book.coverImage}
+                  alt={`${book.title} cover`}
+                  fill
+                  sizes="280px"
+                  className="object-cover"
+                  priority
+                />
+              ) : (
+                <div
+                  className="flex h-full w-full flex-col items-center justify-between p-6 text-center"
+                  style={{ background: `linear-gradient(160deg, ${theme.accent} 0%, #000 140%)` }}
+                >
+                  <span className="mt-2 text-xs uppercase tracking-[0.3em] text-parchment/60">
+                    {book.bookLabel}
+                  </span>
+                  <span className="flex flex-col items-center gap-3">
+                    <span className="h-px w-12 bg-parchment/40" />
+                    <span className="text-sm font-semibold uppercase tracking-[0.25em] text-parchment/90">
+                      Coming
+                      <br />
+                      Soon
+                    </span>
+                    <span className="h-px w-12 bg-parchment/40" />
+                  </span>
+                  <span className="mb-1 text-xs italic text-parchment/60">Lucy Chivers</span>
+                </div>
+              )}
             </div>
           </div>
 
           <div>
             <p className="text-xs uppercase tracking-[0.3em]" style={{ color: theme.accentLight }}>
               {s.name} · {book.bookLabel}
+              {book.comingSoon ? " · Coming soon" : ""}
             </p>
             <h1
               className="mt-2 text-4xl sm:text-5xl text-parchment"
@@ -91,21 +113,38 @@ export default async function BookPage({
               ))}
             </div>
 
-            <a
-              href={book.amazonUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block rounded-md px-8 py-3 text-sm font-semibold uppercase tracking-wide text-void transition-opacity hover:opacity-90"
-              style={{ background: theme.accent }}
-            >
-              Read on Kindle
-            </a>
+            {book.amazonUrl ? (
+              <a
+                href={book.amazonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-block rounded-md px-8 py-3 text-sm font-semibold uppercase tracking-wide text-void transition-opacity hover:opacity-90"
+                style={{ background: theme.accent }}
+              >
+                Read on Kindle
+              </a>
+            ) : (
+              <span
+                className="mt-8 inline-block rounded-md border px-8 py-3 text-sm font-semibold uppercase tracking-wide"
+                style={{ borderColor: theme.accent, color: theme.accentLight }}
+              >
+                Not yet available
+              </span>
+            )}
 
             <div className="mt-12">
               <SignupForm
                 source={book.slug}
-                heading="Want to know when the next one drops?"
-                description={`Join the list and get an email the moment a new Lucy Chivers book is live — tagged from ${book.title}.`}
+                heading={
+                  book.comingSoon
+                    ? "Be the first to know when it's out"
+                    : "Want to know when the next one drops?"
+                }
+                description={
+                  book.comingSoon
+                    ? `Join the list and get an email the moment ${book.title} has a cover, a date, and a way to buy it.`
+                    : `Join the list and get an email the moment a new Lucy Chivers book is live — tagged from ${book.title}.`
+                }
               />
             </div>
           </div>

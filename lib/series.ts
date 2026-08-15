@@ -10,12 +10,14 @@ export interface Book {
   blurb: string[];
   /** Optional pull-quote line from the book */
   pullQuote?: string;
-  /** Placeholder Amazon KDP link — swap for the real one at launch */
-  amazonUrl: string;
-  /** Path to the real cover image in public/covers/ */
-  coverImage: string;
-  /** Width of the face-out cover on the shelf, in rem; slight variation avoids a too-uniform row */
+  /** Amazon KDP link. Omitted for books not yet published. */
+  amazonUrl?: string;
+  /** Path to the real cover image in public/covers/. Omitted for unannounced covers. */
+  coverImage?: string;
+  /** Width of the face-out cover on the shelf, in rem */
   bookWidthRem: number;
+  /** True for an announced-but-unpublished book — shows a "coming soon" tile/badge instead of a cover + buy link */
+  comingSoon?: boolean;
 }
 
 export interface SeriesTheme {
@@ -64,7 +66,7 @@ export const series: Series[] = [
         bookNumber: 1,
         coverImage: "/covers/two-glasses-in.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER1",
+        amazonUrl: "https://amzn.eu/d/04WWZxr0",
         pullQuote: "“We said one rule. We should have said none.”",
         blurb: [
           "Lucy and Ken have a good marriage. A comfortable one. The kind built on years of knowing exactly what the other person will order at dinner and exactly how the evening will end — or won't.",
@@ -79,7 +81,7 @@ export const series: Series[] = [
         bookNumber: 2,
         coverImage: "/covers/weekend-away.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER2",
+        amazonUrl: "https://amzn.eu/d/09ebT9bl",
         pullQuote: "“We packed for three days. We didn't pack for this.”",
         blurb: [
           "A rented cottage, no phone signal, and a rule that was supposed to make things easier. Lucy and Ken take the open door from their first conversation and try to walk through it somewhere no one will recognise them.",
@@ -94,12 +96,23 @@ export const series: Series[] = [
         bookNumber: 3,
         coverImage: "/covers/taste-of-tuscany.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER3",
+        amazonUrl: "https://amzn.eu/d/0bUFvo08",
         pullQuote: "“The wine was Tuscan. The jealousy was ours.”",
         blurb: [
           "A holiday villa, a bottle a night, and a couple they meet at the market who seem to have solved the thing Lucy and Ken are still figuring out. It should be a relaxing trip. It is not a relaxing trip.",
           "Under the sun and the slow schedule of an Italian summer, old rules stop fitting the way they used to. Lucy and Ken find out that jealousy and desire can share a table — and that the hardest conversations taste better with good wine.",
           "A story about wanting the same person more, even while wanting other things too.",
+        ],
+      },
+      {
+        slug: "book-four",
+        title: "Book Four",
+        bookLabel: "Book Four",
+        bookNumber: 4,
+        bookWidthRem: 8.8,
+        comingSoon: true,
+        blurb: [
+          "Lucy and Ken's story continues. Details on Book Four are still under wraps — join the mailing list and you'll be the first to know when the cover, title, and release date drop.",
         ],
       },
     ],
@@ -126,7 +139,7 @@ export const series: Series[] = [
         bookNumber: 1,
         coverImage: "/covers/lost-dynasties-1.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://www.amazon.com/dp/PLACEHOLDERLD1",
+        amazonUrl: "https://amzn.eu/d/0905xEkC",
         pullQuote: "“I have ruled longer than your country has had a name. I did not expect you.”",
         blurb: [
           "Anabelle Reid came to the Highlands to bury her grandmother and sell a crumbling stone cottage, not to stumble into a war that has been quietly burning under the heather for six hundred years. The locals warn her not to walk the old drover's road after dark. She doesn't listen.",
@@ -141,12 +154,23 @@ export const series: Series[] = [
         bookNumber: 2,
         coverImage: "/covers/lost-dynasties-2.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://www.amazon.com/dp/PLACEHOLDERLD2",
+        amazonUrl: "https://amzn.eu/d/0j9R8lQF",
         pullQuote: "“They will burn every glen between here and the sea before they let a human sit that close to a throne.”",
         blurb: [
           "The truce is over. What Anabelle and Carla woke on the drover's road didn't stay buried — and now the wolf clans and the older vampire houses both want the same thing: Carla dethroned, and the mortal woman at her side gone, one way or another.",
           "Carla was built for war. She has survived every one the Highlands have thrown at her court for six centuries. What she has never had to survive is fighting one while afraid of losing someone — and Anabelle, who was never supposed to matter, has become the single thing Carla cannot lose and still call the victory worth it.",
           "As the glens burn and old dynasties choose sides, Anabelle has to decide how much of her own life she's willing to spend on a war that was never supposed to be hers. Carla has to decide whether a queen can rule with her heart exposed — and survive it.",
+        ],
+      },
+      {
+        slug: "volume-three",
+        title: "Volume Three",
+        bookLabel: "Volume Three",
+        bookNumber: 3,
+        bookWidthRem: 8.8,
+        comingSoon: true,
+        blurb: [
+          "The war isn't over, and neither is Anabelle and Carla's story. Volume Three is still being written — join the mailing list to hear about the cover reveal and release date first.",
         ],
       },
     ],
