@@ -51,7 +51,7 @@ export default async function BookPage({
         <div className="mt-8 grid gap-12 sm:grid-cols-[280px_1fr]">
           <div className="mx-auto w-full max-w-[280px]">
             <div
-              className="relative aspect-[2/3] w-full overflow-hidden rounded-sm shadow-2xl"
+              className="relative aspect-[5/8] w-full overflow-hidden rounded-sm shadow-2xl"
               style={{ boxShadow: `0 20px 40px rgba(0,0,0,0.6)` }}
             >
               <Image

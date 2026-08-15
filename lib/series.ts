@@ -63,7 +63,7 @@ export const series: Series[] = [
         bookLabel: "Book One",
         bookNumber: 1,
         coverImage: "/covers/two-glasses-in.jpg",
-        bookWidthRem: 8.6,
+        bookWidthRem: 8.8,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER1",
         pullQuote: "“We said one rule. We should have said none.”",
         blurb: [
@@ -78,7 +78,7 @@ export const series: Series[] = [
         bookLabel: "Book Two",
         bookNumber: 2,
         coverImage: "/covers/weekend-away.jpg",
-        bookWidthRem: 9.4,
+        bookWidthRem: 8.8,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER2",
         pullQuote: "“We packed for three days. We didn't pack for this.”",
         blurb: [
@@ -93,7 +93,7 @@ export const series: Series[] = [
         bookLabel: "Book Three",
         bookNumber: 3,
         coverImage: "/covers/taste-of-tuscany.jpg",
-        bookWidthRem: 8.2,
+        bookWidthRem: 8.8,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER3",
         pullQuote: "“The wine was Tuscan. The jealousy was ours.”",
         blurb: [
@@ -140,7 +140,7 @@ export const series: Series[] = [
         bookLabel: "Volume Two",
         bookNumber: 2,
         coverImage: "/covers/lost-dynasties-2.jpg",
-        bookWidthRem: 9.1,
+        bookWidthRem: 8.8,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDERLD2",
         pullQuote: "“They will burn every glen between here and the sea before they let a human sit that close to a throne.”",
         blurb: [

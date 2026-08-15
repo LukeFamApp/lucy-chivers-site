@@ -36,7 +36,10 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
       className="group relative shrink-0 cursor-pointer select-none outline-none"
       style={{
         width: `${book.bookWidthRem}rem`,
-        aspectRatio: "2 / 3",
+        // 5:8 matches the supplied cover art (3 of 5 covers are exactly this
+        // ratio; the other two are close at 2:3), so object-cover below only
+        // has to trim a sliver rather than zooming unevenly across covers.
+        aspectRatio: "5 / 8",
         perspective: "1400px",
       }}
     >
