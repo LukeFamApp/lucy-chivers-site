@@ -1,7 +1,8 @@
 "use client";
 
 import { forwardRef } from "react";
-import type { Book } from "@/lib/books";
+import Image from "next/image";
+import type { Book } from "@/lib/series";
 
 interface BookSpineProps {
   book: Book;
@@ -11,9 +12,10 @@ interface BookSpineProps {
 }
 
 /**
- * A single upright book spine on the shelf. Tilts outward (rotateY) when
- * `isActive` — either because the cursor is nearest it (desktop) or it has
- * scrolled to the centre of the viewport (touch).
+ * A single book standing upright on the shelf, showing its real cover art.
+ * Tilts outward (rotateY) when `isActive` — either because the cursor is
+ * nearest it (desktop) or it has scrolled to the centre of the viewport
+ * (touch).
  */
 const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpine(
   { book, isActive, isOpening, onSelect },
@@ -34,44 +36,29 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
       }}
     >
       <span
-        className={`block h-full w-full origin-left rounded-[2px] transition-transform duration-200 ease-out will-change-transform ${
+        className={`relative block h-full w-full origin-left overflow-hidden rounded-[3px] transition-transform duration-200 ease-out will-change-transform ${
           isOpening ? "scale-105 opacity-0 duration-300" : ""
         }`}
         style={{
           transform: isActive
             ? "rotateY(-11deg) translateX(3px)"
             : "rotateY(0deg) translateX(0px)",
-          background: `linear-gradient(90deg, ${book.accent} 0%, ${book.accent}dd 55%, ${book.accent}99 100%)`,
           boxShadow: isActive
-            ? "6px 14px 22px rgba(0,0,0,0.55), inset -4px 0 8px rgba(0,0,0,0.35)"
-            : "3px 8px 14px rgba(0,0,0,0.4), inset -3px 0 6px rgba(0,0,0,0.3)",
+            ? "8px 18px 28px rgba(0,0,0,0.6), inset -3px 0 6px rgba(0,0,0,0.35)"
+            : "4px 10px 16px rgba(0,0,0,0.45), inset -2px 0 5px rgba(0,0,0,0.3)",
           transformStyle: "preserve-3d",
         }}
       >
-        {/* spine label */}
-        <span className="flex h-full w-full flex-col items-center justify-between px-2 py-4">
-          <span className="text-[0.6rem] uppercase tracking-[0.25em] text-parchment/70">
-            {book.bookNumber}
-          </span>
-          <span
-            className="font-display text-base leading-tight text-parchment sm:text-lg"
-            style={{
-              writingMode: "vertical-rl",
-              transform: "rotate(180deg)",
-              letterSpacing: "0.02em",
-            }}
-          >
-            {book.title}
-          </span>
-          <span
-            className="font-display text-xs italic text-parchment/75"
-            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-          >
-            Lucy Chivers
-          </span>
-        </span>
+        <Image
+          src={book.coverImage}
+          alt={`${book.title} cover`}
+          fill
+          sizes="(max-width: 640px) 30vw, 200px"
+          className="object-cover"
+          priority={book.bookNumber === 1}
+        />
         {/* spine edge highlight */}
-        <span className="pointer-events-none absolute inset-y-0 left-0 w-[3px] bg-parchment/20" />
+        <span className="pointer-events-none absolute inset-y-0 left-0 w-[3px] bg-white/15" />
       </span>
     </button>
   );

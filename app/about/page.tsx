@@ -26,6 +26,16 @@ export default function AboutPage() {
           romance actually is.
         </p>
         <p>
+          Lately that&apos;s split into two shelves. <em>Two Glasses In</em>{" "}
+          is the contemporary side — long marriages, real jealousy, too much
+          wine. <em>Lost Dynasties</em> is the other thing I apparently
+          needed to get out of my system: a sapphic paranormal series set in
+          the Scottish Highlands, about a human woman pulled into a war
+          between vampire courts and werewolf clans, and the ancient queen
+          who was never supposed to want her. Different worlds, same rule —
+          I don&apos;t put anything on the page that hasn&apos;t earned it.
+        </p>
+        <p>
           I live somewhere with decent wine and bad WiFi, which is probably
           why the books keep getting written. If you&apos;ve read one and it
           did something to you — good or complicated — I&apos;d love to hear

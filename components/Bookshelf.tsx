@@ -2,10 +2,17 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Book } from "@/lib/books";
+import type { Book } from "@/lib/series";
 import BookSpine from "./BookSpine";
 
-export default function Bookshelf({ books }: { books: Book[] }) {
+interface BookshelfProps {
+  books: Book[];
+  /** Shelf plank gradient, top -> bottom. Defaults to the warm wood tones. */
+  plankFrom?: string;
+  plankTo?: string;
+}
+
+export default function Bookshelf({ books, plankFrom, plankTo }: BookshelfProps) {
   const router = useRouter();
   const shelfRef = useRef<HTMLDivElement>(null);
   const spineRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
@@ -102,6 +109,8 @@ export default function Bookshelf({ books }: { books: Book[] }) {
     }, 190);
   }
 
+  const plankGradient = `linear-gradient(180deg, ${plankFrom ?? "#6b432a"}, ${plankTo ?? "#2c1c14"})`;
+
   return (
     <div
       ref={shelfRef}
@@ -109,7 +118,7 @@ export default function Bookshelf({ books }: { books: Book[] }) {
       onMouseLeave={handleMouseLeave}
       className="relative overflow-x-auto pb-2"
     >
-      <div className="flex min-w-max items-end gap-3 px-8 pt-14 sm:gap-5 sm:px-14">
+      <div className="flex min-w-max items-end gap-4 px-8 pt-10 sm:gap-6 sm:px-14">
         {books.map((book) => (
           <BookSpine
             key={book.slug}
@@ -123,10 +132,13 @@ export default function Bookshelf({ books }: { books: Book[] }) {
       </div>
 
       {/* the shelf plank */}
-      <div className="relative mt-[-2px] h-6 min-w-max bg-gradient-to-b from-wood-light to-wood-dark shadow-[0_12px_24px_rgba(0,0,0,0.5)]">
-        <div className="h-full w-full bg-[repeating-linear-gradient(90deg,rgba(0,0,0,0.08)_0px,rgba(0,0,0,0.08)_2px,transparent_2px,transparent_60px)]" />
+      <div
+        className="relative mt-[-2px] h-5 min-w-max shadow-[0_12px_24px_rgba(0,0,0,0.5)]"
+        style={{ background: plankGradient }}
+      >
+        <div className="h-full w-full bg-[repeating-linear-gradient(90deg,rgba(0,0,0,0.1)_0px,rgba(0,0,0,0.1)_2px,transparent_2px,transparent_60px)]" />
       </div>
-      <div className="h-3 min-w-max bg-wood-dark/90" />
+      <div className="h-2 min-w-max" style={{ background: plankTo ?? "#2c1c14" }} />
     </div>
   );
 }
