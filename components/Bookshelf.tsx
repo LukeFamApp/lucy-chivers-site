@@ -10,9 +10,11 @@ interface BookshelfProps {
   /** Shelf plank gradient, top -> bottom. Defaults to the warm wood tones. */
   plankFrom?: string;
   plankTo?: string;
+  /** Series accent color, tints each book's spine edge. */
+  accent: string;
 }
 
-export default function Bookshelf({ books, plankFrom, plankTo }: BookshelfProps) {
+export default function Bookshelf({ books, plankFrom, plankTo, accent }: BookshelfProps) {
   const router = useRouter();
   const shelfRef = useRef<HTMLDivElement>(null);
   const spineRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
@@ -56,9 +58,9 @@ export default function Bookshelf({ books, plankFrom, plankTo }: BookshelfProps)
         }
       });
 
-      // Only react if the cursor is reasonably close to a spine (within ~90px),
-      // otherwise let all books rest.
-      setActiveSlug(nearestDist < 90 ? nearestSlug : null);
+      // Only react if the cursor is reasonably close to a book (within ~130px —
+      // roughly half a book's width plus its gap), otherwise let all books rest.
+      setActiveSlug(nearestDist < 130 ? nearestSlug : null);
     },
     [hasHover]
   );
@@ -118,11 +120,12 @@ export default function Bookshelf({ books, plankFrom, plankTo }: BookshelfProps)
       onMouseLeave={handleMouseLeave}
       className="relative overflow-x-auto pb-2"
     >
-      <div className="flex min-w-max items-end gap-4 px-8 pt-10 sm:gap-6 sm:px-14">
+      <div className="flex min-w-max items-end gap-6 px-8 pt-10 sm:gap-10 sm:px-14">
         {books.map((book) => (
           <BookSpine
             key={book.slug}
             book={book}
+            accent={accent}
             isActive={activeSlug === book.slug}
             isOpening={openingSlug === book.slug}
             ref={(el) => registerSpine(book.slug, el)}

@@ -26,7 +26,7 @@ export default function SeriesShelf({ s }: { s: Series }) {
         </h2>
         <p className="mt-2 text-sm text-parchment-dim/90 sm:text-base">{s.tagline}</p>
       </div>
-      <Bookshelf books={s.books} plankFrom={theme.plankFrom} plankTo={theme.plankTo} />
+      <Bookshelf books={s.books} plankFrom={theme.plankFrom} plankTo={theme.plankTo} accent={theme.accent} />
     </section>
   );
 }

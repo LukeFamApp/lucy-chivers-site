@@ -14,8 +14,8 @@ export interface Book {
   amazonUrl: string;
   /** Path to the real cover image in public/covers/ */
   coverImage: string;
-  /** Slight width variation so the shelf doesn't look uniform, in rem */
-  spineWidthRem: number;
+  /** Width of the face-out cover on the shelf, in rem; slight variation avoids a too-uniform row */
+  bookWidthRem: number;
 }
 
 export interface SeriesTheme {
@@ -63,7 +63,7 @@ export const series: Series[] = [
         bookLabel: "Book One",
         bookNumber: 1,
         coverImage: "/covers/two-glasses-in.jpg",
-        spineWidthRem: 4.4,
+        bookWidthRem: 8.6,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER1",
         pullQuote: "“We said one rule. We should have said none.”",
         blurb: [
@@ -78,7 +78,7 @@ export const series: Series[] = [
         bookLabel: "Book Two",
         bookNumber: 2,
         coverImage: "/covers/weekend-away.jpg",
-        spineWidthRem: 4.9,
+        bookWidthRem: 9.4,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER2",
         pullQuote: "“We packed for three days. We didn't pack for this.”",
         blurb: [
@@ -93,7 +93,7 @@ export const series: Series[] = [
         bookLabel: "Book Three",
         bookNumber: 3,
         coverImage: "/covers/taste-of-tuscany.jpg",
-        spineWidthRem: 4.2,
+        bookWidthRem: 8.2,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDER3",
         pullQuote: "“The wine was Tuscan. The jealousy was ours.”",
         blurb: [
@@ -125,7 +125,7 @@ export const series: Series[] = [
         bookLabel: "Volume One",
         bookNumber: 1,
         coverImage: "/covers/lost-dynasties-1.jpg",
-        spineWidthRem: 4.6,
+        bookWidthRem: 8.8,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDERLD1",
         pullQuote: "“I have ruled longer than your country has had a name. I did not expect you.”",
         blurb: [
@@ -140,7 +140,7 @@ export const series: Series[] = [
         bookLabel: "Volume Two",
         bookNumber: 2,
         coverImage: "/covers/lost-dynasties-2.jpg",
-        spineWidthRem: 4.8,
+        bookWidthRem: 9.1,
         amazonUrl: "https://www.amazon.com/dp/PLACEHOLDERLD2",
         pullQuote: "“They will burn every glen between here and the sea before they let a human sit that close to a throne.”",
         blurb: [
