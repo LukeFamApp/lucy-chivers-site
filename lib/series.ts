@@ -110,9 +110,9 @@ export const series: Series[] = [
         bookLabel: "Book Four",
         bookNumber: 4,
         bookWidthRem: 8.8,
-        comingSoon: true,
+        amazonUrl: "https://www.amazon.co.uk/dp/B0HL5816YG",
         blurb: [
-          "Lucy and Ken's story continues. Details on Book Four are still under wraps — join the mailing list and you'll be the first to know when the cover, title, and release date drop.",
+          "Lucy and Ken's story continues. Book Four is out now on Kindle.",
         ],
       },
     ],

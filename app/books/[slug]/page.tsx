@@ -74,9 +74,15 @@ export default async function BookPage({
                   <span className="flex flex-col items-center gap-3">
                     <span className="h-px w-12 bg-parchment/40" />
                     <span className="text-sm font-semibold uppercase tracking-[0.25em] text-parchment/90">
-                      Coming
-                      <br />
-                      Soon
+                      {book.comingSoon ? (
+                        <>
+                          Coming
+                          <br />
+                          Soon
+                        </>
+                      ) : (
+                        book.title
+                      )}
                     </span>
                     <span className="h-px w-12 bg-parchment/40" />
                   </span>

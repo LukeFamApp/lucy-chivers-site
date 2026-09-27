@@ -111,9 +111,15 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
               <span className="flex flex-col items-center gap-2">
                 <span className="h-px w-8 bg-parchment/40" />
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/90">
-                  Coming
-                  <br />
-                  Soon
+                  {book.comingSoon ? (
+                    <>
+                      Coming
+                      <br />
+                      Soon
+                    </>
+                  ) : (
+                    book.title
+                  )}
                 </span>
                 <span className="h-px w-8 bg-parchment/40" />
               </span>
