@@ -34,7 +34,7 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
       onClick={(e) => onSelect(book, e.currentTarget)}
       aria-label={
         book.comingSoon
-          ? `${book.title} — coming soon`
+          ? `${book.title}, coming soon`
           : `Read ${book.title} by Lucy Chivers`
       }
       className="group relative shrink-0 cursor-pointer select-none outline-none"

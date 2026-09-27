@@ -25,14 +25,14 @@ export default function HomePage() {
             <p>
               I write in two very different registers. Under{" "}
               <span className="text-ember-light">Two Glasses In</span>, it&apos;s the
-              conversations couples have after the second glass of wine — honest,
+              conversations couples have after the second glass of wine, honest,
               unglamorous, occasionally reckless. Under{" "}
               <span className="text-[#c2456f]">Lost Dynasties</span>, it&apos;s
               something darker: a hidden war under the Highlands and a queen who
               was never supposed to want anyone again.
             </p>
             <p>
-              Different worlds, same rule — slow builds, real stakes, and nothing
+              Different worlds, same rule, slow builds, real stakes, and nothing
               on the page that didn&apos;t earn its place.
             </p>
           </div>

@@ -69,9 +69,9 @@ export const series: Series[] = [
         amazonUrl: "https://amzn.eu/d/04WWZxr0",
         pullQuote: "“We said one rule. We should have said none.”",
         blurb: [
-          "Lucy and Ken have a good marriage. A comfortable one. The kind built on years of knowing exactly what the other person will order at dinner and exactly how the evening will end — or won't.",
+          "Lucy and Ken have a good marriage. A comfortable one. The kind built on years of knowing exactly what the other person will order at dinner, and exactly how the evening will end, or won't.",
           "So when one honest, wine-loosened conversation cracks the door open on something neither of them expected to want, they don't slam it shut. They set a rule: one night, one honesty, no secrets. It should be simple.",
-          "It is not simple. It is the beginning of something that will ask them both what their marriage is actually for — and whether wanting more of each other, differently, is its own kind of faithful.",
+          "It is not simple. It is the beginning of something that will ask them both what their marriage is actually for, and whether wanting more of each other, differently, is its own kind of faithful.",
         ],
       },
       {
@@ -85,7 +85,7 @@ export const series: Series[] = [
         pullQuote: "“We packed for three days. We didn't pack for this.”",
         blurb: [
           "A rented cottage, no phone signal, and a rule that was supposed to make things easier. Lucy and Ken take the open door from their first conversation and try to walk through it somewhere no one will recognise them.",
-          "Away from the routines that usually keep them safe, the weekend becomes less about the arrangement they agreed to and more about the two people who agreed to it — what they're each still hiding, and what they're finally ready to say out loud.",
+          "Away from the routines that usually keep them safe, the weekend becomes less about the arrangement they agreed to and more about the two people who agreed to it, what they're each still hiding, and what they're finally ready to say out loud.",
           "By Sunday night, coming home means something different than it did on Friday.",
         ],
       },
@@ -100,7 +100,7 @@ export const series: Series[] = [
         pullQuote: "“The wine was Tuscan. The jealousy was ours.”",
         blurb: [
           "A holiday villa, a bottle a night, and a couple they meet at the market who seem to have solved the thing Lucy and Ken are still figuring out. It should be a relaxing trip. It is not a relaxing trip.",
-          "Under the sun and the slow schedule of an Italian summer, old rules stop fitting the way they used to. Lucy and Ken find out that jealousy and desire can share a table — and that the hardest conversations taste better with good wine.",
+          "Under the sun and the slow schedule of an Italian summer, old rules stop fitting the way they used to. Lucy and Ken find out that jealousy and desire can share a table, and that the hardest conversations taste better with good wine.",
           "A story about wanting the same person more, even while wanting other things too.",
         ],
       },
@@ -114,9 +114,9 @@ export const series: Series[] = [
         amazonUrl: "https://www.amazon.co.uk/dp/B0HL5816YG",
         pullQuote: "“We weren't looking for anyone else. And then someone asked.”",
         blurb: [
-          "Three books in, Lucy and Ken thought they knew the shape of their own rules — one night, one honesty, no secrets, and always, always just the two of them deciding. Then a weekend away with old friends turns into a conversation neither of them saw coming: an invitation, offered carefully, to open the circle wider.",
+          "Three books in, Lucy and Ken thought they knew the shape of their own rules, one night, one honesty, no secrets, and always, always just the two of them deciding. Then a weekend away with old friends turns into a conversation neither of them saw coming: an invitation, offered carefully, to open the circle wider.",
           "It should be an easy no. It isn't. Lucy finds herself wanting to say yes for reasons that have nothing to do with Ken, and everything to do with who she's become since that first honest conversation over wine. Ken finds himself watching her want it, and discovering that jealousy and hope can sit in the same chest at once.",
-          "An Open Invitation is about the moment a couple's private arrangement stops being private — and what it costs, and gives back, to let someone else all the way in.",
+          "An Open Invitation is about the moment a couple's private arrangement stops being private, and what it costs, and gives back, to let someone else all the way in.",
         ],
       },
     ],
@@ -147,8 +147,8 @@ export const series: Series[] = [
         pullQuote: "“I have ruled longer than your country has had a name. I did not expect you.”",
         blurb: [
           "Anabelle Reid came to the Highlands to bury her grandmother and sell a crumbling stone cottage, not to stumble into a war that has been quietly burning under the heather for six hundred years. The locals warn her not to walk the old drover's road after dark. She doesn't listen.",
-          "What finds her there is Carla — ancient, immaculate, and the last true queen of a vampire court that has spent centuries in uneasy truce with the werewolf clans holding the glens. Carla has no use for a mortal woman with her grandmother's stubborn chin and her grandmother's ring. Until she does.",
-          "As old alliances fracture and something wakes in the mountains that predates both their kinds, Anabelle finds herself the one thing no one in this world has been in half a millennium: unpredictable. Carla finds herself something she thought she'd outlived the capacity for — interested.",
+          "What finds her there is Carla, ancient, immaculate, and the last true queen of a vampire court that has spent centuries in uneasy truce with the werewolf clans holding the glens. Carla has no use for a mortal woman with her grandmother's stubborn chin and her grandmother's ring. Until she does.",
+          "As old alliances fracture and something wakes in the mountains that predates both their kinds, Anabelle finds herself the one thing no one in this world has been in half a millennium: unpredictable. Carla finds herself something she thought she'd outlived the capacity for, interested.",
         ],
       },
       {
@@ -161,9 +161,9 @@ export const series: Series[] = [
         amazonUrl: "https://amzn.eu/d/0j9R8lQF",
         pullQuote: "“They will burn every glen between here and the sea before they let a human sit that close to a throne.”",
         blurb: [
-          "The truce is over. What Anabelle and Carla woke on the drover's road didn't stay buried — and now the wolf clans and the older vampire houses both want the same thing: Carla dethroned, and the mortal woman at her side gone, one way or another.",
-          "Carla was built for war. She has survived every one the Highlands have thrown at her court for six centuries. What she has never had to survive is fighting one while afraid of losing someone — and Anabelle, who was never supposed to matter, has become the single thing Carla cannot lose and still call the victory worth it.",
-          "As the glens burn and old dynasties choose sides, Anabelle has to decide how much of her own life she's willing to spend on a war that was never supposed to be hers. Carla has to decide whether a queen can rule with her heart exposed — and survive it.",
+          "The truce is over. What Anabelle and Carla woke on the drover's road didn't stay buried, and now the wolf clans and the older vampire houses both want the same thing: Carla dethroned, and the mortal woman at her side gone, one way or another.",
+          "Carla was built for war. She has survived every one the Highlands have thrown at her court for six centuries. What she has never had to survive is fighting one while afraid of losing someone, and Anabelle, who was never supposed to matter, has become the single thing Carla cannot lose and still call the victory worth it.",
+          "As the glens burn and old dynasties choose sides, Anabelle has to decide how much of her own life she's willing to spend on a war that was never supposed to be hers. Carla has to decide whether a queen can rule with her heart exposed, and survive it.",
         ],
       },
       {
@@ -174,7 +174,7 @@ export const series: Series[] = [
         bookWidthRem: 8.8,
         comingSoon: true,
         blurb: [
-          "The war isn't over, and neither is Anabelle and Carla's story. Volume Three is still being written — join the mailing list to hear about the cover reveal and release date first.",
+          "The war isn't over, and neither is Anabelle and Carla's story. Volume Three is still being written, join the mailing list to hear about the cover reveal and release date first.",
         ],
       },
     ],

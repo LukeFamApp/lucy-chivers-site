@@ -13,7 +13,7 @@ export default function AboutPage() {
 
       <div className="mt-8 space-y-5 leading-relaxed text-parchment-dim">
         <p>
-          Lucy Chivers is a pen name — which, if you&apos;ve read any of the
+          Lucy Chivers is a pen name, which, if you&apos;ve read any of the
           books, will make immediate sense. I write about marriages that are
           honest about what they want, even when what they want is
           complicated. Long dinners. Too much wine. Conversations that start
@@ -27,19 +27,29 @@ export default function AboutPage() {
         </p>
         <p>
           Lately that&apos;s split into two shelves. <em>Two Glasses In</em>{" "}
-          is the contemporary side — long marriages, real jealousy, too much
+          is the contemporary side, long marriages, real jealousy, too much
           wine. <em>Lost Dynasties</em> is the other thing I apparently
           needed to get out of my system: a sapphic paranormal series set in
           the Scottish Highlands, about a human woman pulled into a war
           between vampire courts and werewolf clans, and the ancient queen
-          who was never supposed to want her. Different worlds, same rule —
+          who was never supposed to want her. Different worlds, same rule,
           I don&apos;t put anything on the page that hasn&apos;t earned it.
         </p>
         <p>
           I live somewhere with decent wine and bad WiFi, which is probably
           why the books keep getting written. If you&apos;ve read one and it
-          did something to you — good or complicated — I&apos;d love to hear
-          about it. That&apos;s what the mailing list is really for.
+          did something to you, good or complicated, I&apos;d love to hear
+          about it. That&apos;s what the mailing list is really for, or find
+          me on TikTok{" "}
+          <a
+            href="https://www.tiktok.com/@lucychiversbooks"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-ember-light hover:text-ember transition-colors"
+          >
+            @lucychiversbooks
+          </a>
+          .
         </p>
         <p className="font-display text-xl italic text-parchment">
           Thanks for reading. Pour something first.

@@ -15,7 +15,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export default function SignupForm({
   source,
   heading = "Never miss a release",
-  description = "One email when a new book drops. No spam, no noise — just an invite back to the shelf.",
+  description = "One email when a new book drops. No spam, no noise, just an invite back to the shelf.",
 }: SignupFormProps) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");

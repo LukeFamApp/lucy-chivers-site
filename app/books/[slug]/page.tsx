@@ -149,7 +149,7 @@ export default async function BookPage({
                 description={
                   book.comingSoon
                     ? `Join the list and get an email the moment ${book.title} has a cover, a date, and a way to buy it.`
-                    : `Join the list and get an email the moment a new Lucy Chivers book is live — tagged from ${book.title}.`
+                    : `Join the list and get an email the moment a new Lucy Chivers book is live, tagged from ${book.title}.`
                 }
               />
             </div>
