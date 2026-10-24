@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 import Image from "next/image";
-import type { Book } from "@/lib/series";
+import { isComingSoon, type Book } from "@/lib/series";
 
 interface BookSpineProps {
   book: Book;
@@ -25,6 +25,7 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
   ref
 ) {
   const depthRem = 0.85;
+  const comingSoon = isComingSoon(book);
 
   return (
     <button
@@ -33,7 +34,7 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
       data-slug={book.slug}
       onClick={(e) => onSelect(book, e.currentTarget)}
       aria-label={
-        book.comingSoon
+        comingSoon
           ? `${book.title}, coming soon`
           : `Read ${book.title} by Lucy Chivers`
       }
@@ -47,6 +48,11 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
         perspective: "1400px",
       }}
     >
+      {comingSoon && book.coverImage && (
+        <span className="pointer-events-none absolute -top-7 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full border border-parchment/40 bg-black/70 px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-parchment">
+          Coming soon
+        </span>
+      )}
       <span
         className={`relative block h-full w-full transition-transform duration-200 ease-out will-change-transform ${
           isOpening ? "scale-105 opacity-0 duration-300" : ""
@@ -111,7 +117,7 @@ const BookSpine = forwardRef<HTMLButtonElement, BookSpineProps>(function BookSpi
               <span className="flex flex-col items-center gap-2">
                 <span className="h-px w-8 bg-parchment/40" />
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-parchment/90">
-                  {book.comingSoon ? (
+                  {comingSoon ? (
                     <>
                       Coming
                       <br />

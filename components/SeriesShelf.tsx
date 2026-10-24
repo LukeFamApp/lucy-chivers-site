@@ -1,8 +1,9 @@
+import Link from "next/link";
 import Bookshelf from "./Bookshelf";
 import type { Series } from "@/lib/series";
 
 /**
- * One themed "room" on the homepage — a section heading + tagline sitting
+ * One themed "room" on the homepage: a section heading + tagline sitting
  * above a shelf styled for that series. Background stays simple/dark so the
  * real cover art carries the visual weight, not competing shelf textures.
  */
@@ -25,8 +26,27 @@ export default function SeriesShelf({ s }: { s: Series }) {
           {s.name}
         </h2>
         <p className="mt-2 text-sm text-parchment-dim/90 sm:text-base">{s.tagline}</p>
+        {s.intro && (
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-parchment-dim/75">
+            {s.intro}
+          </p>
+        )}
+        {s.crossLink && (
+          <Link
+            href={s.crossLink.href}
+            className="mt-4 inline-block text-xs uppercase tracking-[0.2em] underline underline-offset-4 transition-opacity hover:opacity-80"
+            style={{ color: theme.accentLight }}
+          >
+            {s.crossLink.label}
+          </Link>
+        )}
       </div>
-      <Bookshelf books={s.books} plankFrom={theme.plankFrom} plankTo={theme.plankTo} accent={theme.accent} />
+      <Bookshelf
+        books={s.books}
+        plankFrom={theme.plankFrom}
+        plankTo={theme.plankTo}
+        accent={theme.accent}
+      />
     </section>
   );
 }

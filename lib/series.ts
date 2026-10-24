@@ -3,6 +3,10 @@ export interface Book {
   slug: string;
   /** Display title */
   title: string;
+  /** Optional subtitle shown under the title on the book page */
+  subtitle?: string;
+  /** Optional small line shown under the title, e.g. "A Two Glasses In story" */
+  kicker?: string;
   /** "Book One", "Volume 1", etc. */
   bookLabel: string;
   bookNumber: number;
@@ -10,20 +14,28 @@ export interface Book {
   blurb: string[];
   /** Optional pull-quote line from the book */
   pullQuote?: string;
-  /** Amazon KDP link. Omitted for books not yet published. */
+  /**
+   * Amazon ASIN. Builds https://www.amazon.co.uk/dp/<ASIN>. While this is still a
+   * bracketed placeholder like "[UNWRAPPED_ASIN]", the book shows as "Coming soon"
+   * with no buy button. Replace the placeholder with the real ASIN to go live.
+   */
+  asin?: string;
+  /** Full buy link, for books that use a short link instead of an ASIN. */
   amazonUrl?: string;
   /** Path to the real cover image in public/covers/. Omitted for unannounced covers. */
   coverImage?: string;
   /** Width of the face-out cover on the shelf, in rem */
   bookWidthRem: number;
-  /** True for an announced-but-unpublished book — shows a "coming soon" tile/badge instead of a cover + buy link */
-  comingSoon?: boolean;
+  /** Optional link shown on the book page, e.g. back to a related series */
+  relatedLink?: { label: string; href: string };
 }
 
 export interface SeriesTheme {
   /** Primary accent used for headings, buttons, links within this series */
   accent: string;
   accentLight: string;
+  /** Text colour used on top of `accent` (buy button) */
+  buttonText: string;
   /** Shelf background gradient stops */
   shelfFrom: string;
   shelfVia: string;
@@ -39,8 +51,27 @@ export interface Series {
   slug: string;
   name: string;
   tagline: string;
+  /** Optional longer intro shown under the tagline on the shelf */
+  intro?: string;
+  /** Optional link shown under the tagline on the shelf */
+  crossLink?: { label: string; href: string };
   theme: SeriesTheme;
   books: Book[];
+}
+
+const ASIN_RE = /^[A-Z0-9]{10}$/;
+
+/** The buy link for a book, or undefined if it has no real ASIN / link yet. */
+export function getBuyUrl(book: Book): string | undefined {
+  if (book.asin && ASIN_RE.test(book.asin)) {
+    return `https://www.amazon.co.uk/dp/${book.asin}`;
+  }
+  return book.amazonUrl;
+}
+
+/** A book with no real buy link yet is shown as "Coming soon". */
+export function isComingSoon(book: Book): boolean {
+  return !getBuyUrl(book);
 }
 
 export const series: Series[] = [
@@ -48,9 +79,11 @@ export const series: Series[] = [
     slug: "two-glasses-in",
     name: "Two Glasses In",
     tagline: "Wine, honesty, and marriages brave enough to want more.",
+    crossLink: { label: "Josh's own story", href: "/#bristol-after-dark" },
     theme: {
       accent: "#c8813a",
       accentLight: "#e0a35e",
+      buttonText: "#1b120f",
       shelfFrom: "#2c1c14",
       shelfVia: "#3a2417",
       shelfTo: "#4a3020",
@@ -61,12 +94,12 @@ export const series: Series[] = [
     books: [
       {
         slug: "two-glasses-in",
-        title: "Two Glasses In",
+        title: "Two Glasses In: The Second Anniversary",
         bookLabel: "Book One",
         bookNumber: 1,
-        coverImage: "/covers/two-glasses-in.jpg",
+        coverImage: "/covers/two-glasses-in-1.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://amzn.eu/d/04WWZxr0",
+        asin: "B0HDK3BZYR",
         pullQuote: "“We said one rule. We should have said none.”",
         blurb: [
           "Lucy and Ken have a good marriage. A comfortable one. The kind built on years of knowing exactly what the other person will order at dinner, and exactly how the evening will end, or won't.",
@@ -79,9 +112,9 @@ export const series: Series[] = [
         title: "The Weekend Away",
         bookLabel: "Book Two",
         bookNumber: 2,
-        coverImage: "/covers/weekend-away.jpg",
+        coverImage: "/covers/two-glasses-in-2.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://amzn.eu/d/09ebT9bl",
+        asin: "B0HF44667W",
         pullQuote: "“We packed for three days. We didn't pack for this.”",
         blurb: [
           "A rented cottage, no phone signal, and a rule that was supposed to make things easier. Lucy and Ken take the open door from their first conversation and try to walk through it somewhere no one will recognise them.",
@@ -94,9 +127,9 @@ export const series: Series[] = [
         title: "A Taste of Tuscany",
         bookLabel: "Book Three",
         bookNumber: 3,
-        coverImage: "/covers/taste-of-tuscany.jpg",
+        coverImage: "/covers/two-glasses-in-3.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://amzn.eu/d/0bUFvo08",
+        asin: "B0HFBDHPC5",
         pullQuote: "“The wine was Tuscan. The jealousy was ours.”",
         blurb: [
           "A holiday villa, a bottle a night, and a couple they meet at the market who seem to have solved the thing Lucy and Ken are still figuring out. It should be a relaxing trip. It is not a relaxing trip.",
@@ -109,14 +142,29 @@ export const series: Series[] = [
         title: "An Open Invitation",
         bookLabel: "Book Four",
         bookNumber: 4,
-        coverImage: "/covers/book-four.jpg",
+        coverImage: "/covers/two-glasses-in-4.jpg",
         bookWidthRem: 8.8,
-        amazonUrl: "https://www.amazon.co.uk/dp/B0HL5816YG",
+        asin: "B0HL5816YG",
         pullQuote: "“We weren't looking for anyone else. And then someone asked.”",
         blurb: [
           "Three books in, Lucy and Ken thought they knew the shape of their own rules, one night, one honesty, no secrets, and always, always just the two of them deciding. Then a weekend away with old friends turns into a conversation neither of them saw coming: an invitation, offered carefully, to open the circle wider.",
           "It should be an easy no. It isn't. Lucy finds herself wanting to say yes for reasons that have nothing to do with Ken, and everything to do with who she's become since that first honest conversation over wine. Ken finds himself watching her want it, and discovering that jealousy and hope can sit in the same chest at once.",
           "An Open Invitation is about the moment a couple's private arrangement stops being private, and what it costs, and gives back, to let someone else all the way in.",
+        ],
+      },
+      {
+        slug: "unwrapped",
+        title: "Unwrapped",
+        subtitle: "A Steamy Open Marriage MMF Romance",
+        bookLabel: "Book Five",
+        bookNumber: 5,
+        coverImage: "/covers/two-glasses-in-5.jpg",
+        bookWidthRem: 8.8,
+        asin: "[UNWRAPPED_ASIN]",
+        blurb: [
+          "Twenty years married. One secret. And a birthday she will never forget.",
+          "Ken Fletcher has never kept anything from his wife. Not in twenty years of marriage, and certainly not since the night Lucy asked him a question, two glasses in, that opened up their marriage and changed everything. But Lucy's birthday is coming, and Ken is planning the one fantasy she has only ever whispered. It needs Josh. It needs Emily and James. It needs careful planning, a little practice, and a promise that when the moment finally comes, Lucy will still be free to say no.",
+          "Unwrapped is the fifth Two Glasses In novel, and the longest yet. Warm, funny and very steamy, it is a love story about a long marriage, an open door and the people who walk through it.",
         ],
       },
     ],
@@ -128,6 +176,7 @@ export const series: Series[] = [
     theme: {
       accent: "#8b2c4a",
       accentLight: "#c2456f",
+      buttonText: "#f4ead9",
       shelfFrom: "#08060c",
       shelfVia: "#120c1c",
       shelfTo: "#1a1128",
@@ -172,9 +221,45 @@ export const series: Series[] = [
         bookLabel: "Volume Three",
         bookNumber: 3,
         bookWidthRem: 8.8,
-        comingSoon: true,
         blurb: [
           "The war isn't over, and neither is Anabelle and Carla's story. Volume Three is still being written, join the mailing list to hear about the cover reveal and release date first.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "bristol-after-dark",
+    name: "Bristol After Dark",
+    tagline: "Bristol has a different side once the lights go down.",
+    intro:
+      "Josh is a personal trainer with an easy smile and a habit of looking after everyone but himself. For a year he has been the perfect guest in other people's adventures. Now he's starting some of his own. Steamy, warm and very British, each book is a standalone M/M story with a hopeful ending. Set in the world of Two Glasses In. No prior reading needed.",
+    theme: {
+      accent: "#9b1420",
+      accentLight: "#e9803a",
+      buttonText: "#f4ead9",
+      shelfFrom: "#060507",
+      shelfVia: "#0e0a0c",
+      shelfTo: "#170c0e",
+      plankFrom: "#2a1214",
+      plankTo: "#060507",
+      displayFont: "var(--font-display-playfair), Georgia, serif",
+    },
+    books: [
+      {
+        slug: "devil-in-the-detail",
+        title: "Devil in the Detail",
+        subtitle: "A Steamy Halloween M/M Romance Novella",
+        kicker: "A Two Glasses In story",
+        bookLabel: "Book One",
+        bookNumber: 1,
+        coverImage: "/covers/devil-in-the-detail.jpg",
+        bookWidthRem: 8.8,
+        asin: "[DEVIL_ASIN]",
+        relatedLink: { label: "Meet Josh first in Two Glasses In", href: "/#two-glasses-in" },
+        blurb: [
+          "Come as something you're not.",
+          "Josh has spent a year being the perfect guest. Then an invitation arrives: black card, orange ink, a big house in Clifton on Halloween night. Costume compulsory. So Josh goes as the devil. Red glitter, black leather, a pair of horns, and a question he has never asked himself: what happens when the man who always waits to be told starts doing the telling?",
+          "A steamy standalone Halloween novella and the first of Josh's own books from the world of Two Glasses In.",
         ],
       },
     ],

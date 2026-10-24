@@ -26,14 +26,18 @@ export default function AboutPage() {
           romance actually is.
         </p>
         <p>
-          Lately that&apos;s split into two shelves. <em>Two Glasses In</em>{" "}
+          Lately that&apos;s split into three shelves. <em>Two Glasses In</em>{" "}
           is the contemporary side, long marriages, real jealousy, too much
           wine. <em>Lost Dynasties</em> is the other thing I apparently
           needed to get out of my system: a sapphic paranormal series set in
           the Scottish Highlands, about a human woman pulled into a war
           between vampire courts and werewolf clans, and the ancient queen
-          who was never supposed to want her. Different worlds, same rule,
-          I don&apos;t put anything on the page that hasn&apos;t earned it.
+          who was never supposed to want her. The third shelf,{" "}
+          <em>Bristol After Dark</em>, belongs to Josh, who you may remember
+          from <em>Two Glasses In</em>: steamy, warm, very British standalone
+          M/M stories set in the same world, each with a hopeful ending.
+          Different worlds, same rule, I don&apos;t put anything on the page
+          that hasn&apos;t earned it.
         </p>
         <p>
           I live somewhere with decent wine and bad WiFi, which is probably

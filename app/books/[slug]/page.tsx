@@ -1,24 +1,62 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import SignupForm from "@/components/SignupForm";
-import { allBooks, getBookBySlug } from "@/lib/series";
+import { allBooks, getBookBySlug, getBuyUrl, isComingSoon, type Book } from "@/lib/series";
 
 export function generateStaticParams() {
   return allBooks().map((book) => ({ slug: book.slug }));
+}
+
+function fullTitle(book: Book): string {
+  return book.subtitle ? `${book.title}: ${book.subtitle}` : book.title;
+}
+
+/** First ~155 characters of the blurb, cut at a word boundary, for meta descriptions. */
+function metaDescription(book: Book): string {
+  const text = book.blurb.join(" ");
+  if (text.length <= 155) return text;
+  const cut = text.slice(0, 155);
+  return `${cut.slice(0, cut.lastIndexOf(" "))}...`;
 }
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<Metadata> {
   const { slug } = await params;
   const found = getBookBySlug(slug);
   if (!found) return {};
+  const { book } = found;
+  const title = `${fullTitle(book)} | Lucy Chivers`;
+  const description = metaDescription(book);
+  const url = `/books/${book.slug}`;
+  const images = book.coverImage
+    ? [{ url: book.coverImage, alt: `${book.title} cover` }]
+    : undefined;
+
   return {
-    title: `${found.book.title} | Lucy Chivers`,
-    description: found.book.blurb[0],
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "book",
+      title,
+      description,
+      url,
+      siteName: "Lucy Chivers",
+      locale: "en_GB",
+      authors: ["Lucy Chivers"],
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: images?.map((i) => i.url),
+    },
   };
 }
 
@@ -32,6 +70,8 @@ export default async function BookPage({
   if (!found) notFound();
   const { series: s, book } = found;
   const { theme } = s;
+  const buyUrl = getBuyUrl(book);
+  const comingSoon = isComingSoon(book);
 
   return (
     <div
@@ -74,7 +114,7 @@ export default async function BookPage({
                   <span className="flex flex-col items-center gap-3">
                     <span className="h-px w-12 bg-parchment/40" />
                     <span className="text-sm font-semibold uppercase tracking-[0.25em] text-parchment/90">
-                      {book.comingSoon ? (
+                      {comingSoon ? (
                         <>
                           Coming
                           <br />
@@ -95,7 +135,7 @@ export default async function BookPage({
           <div>
             <p className="text-xs uppercase tracking-[0.3em]" style={{ color: theme.accentLight }}>
               {s.name} · {book.bookLabel}
-              {book.comingSoon ? " · Coming soon" : ""}
+              {comingSoon ? " · Coming soon" : ""}
             </p>
             <h1
               className="mt-2 text-4xl sm:text-5xl text-parchment"
@@ -103,6 +143,17 @@ export default async function BookPage({
             >
               {book.title}
             </h1>
+            {book.subtitle && (
+              <p className="mt-2 text-lg text-parchment-dim sm:text-xl">{book.subtitle}</p>
+            )}
+            {book.kicker && (
+              <p
+                className="mt-2 text-xs uppercase tracking-[0.25em]"
+                style={{ color: theme.accentLight }}
+              >
+                {book.kicker}
+              </p>
+            )}
 
             {book.pullQuote && (
               <p
@@ -119,13 +170,13 @@ export default async function BookPage({
               ))}
             </div>
 
-            {book.amazonUrl ? (
+            {buyUrl ? (
               <a
-                href={book.amazonUrl}
+                href={buyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-block rounded-md px-8 py-3 text-sm font-semibold uppercase tracking-wide text-void transition-opacity hover:opacity-90"
-                style={{ background: theme.accent }}
+                className="mt-8 inline-block rounded-md px-8 py-3 text-sm font-semibold uppercase tracking-wide transition-opacity hover:opacity-90"
+                style={{ background: theme.accent, color: theme.buttonText }}
               >
                 Read on Kindle
               </a>
@@ -134,21 +185,33 @@ export default async function BookPage({
                 className="mt-8 inline-block rounded-md border px-8 py-3 text-sm font-semibold uppercase tracking-wide"
                 style={{ borderColor: theme.accent, color: theme.accentLight }}
               >
-                Not yet available
+                Coming soon
               </span>
+            )}
+
+            {book.relatedLink && (
+              <p className="mt-6">
+                <Link
+                  href={book.relatedLink.href}
+                  className="text-sm underline underline-offset-4 transition-opacity hover:opacity-80"
+                  style={{ color: theme.accentLight }}
+                >
+                  {book.relatedLink.label}
+                </Link>
+              </p>
             )}
 
             <div className="mt-12">
               <SignupForm
                 source={book.slug}
                 heading={
-                  book.comingSoon
+                  comingSoon
                     ? "Be the first to know when it's out"
                     : "Want to know when the next one drops?"
                 }
                 description={
-                  book.comingSoon
-                    ? `Join the list and get an email the moment ${book.title} has a cover, a date, and a way to buy it.`
+                  comingSoon
+                    ? `Join the list and get an email the moment ${book.title} is ready to buy.`
                     : `Join the list and get an email the moment a new Lucy Chivers book is live, tagged from ${book.title}.`
                 }
               />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cinzel, Cormorant_Garamond, Karla } from "next/font/google";
+import { Cinzel, Cormorant_Garamond, Karla, Playfair_Display } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import "./globals.css";
 
@@ -16,16 +16,38 @@ const gothicDisplay = Cinzel({
   weight: ["400", "500", "600", "700"],
 });
 
+const playfairDisplay = Playfair_Display({
+  variable: "--font-display-playfair",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+});
+
 const bodySans = Karla({
   variable: "--font-body-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://lucychiversbooks.com";
+const SITE_DESCRIPTION =
+  "Lucy Chivers writes intimate contemporary romance (Two Glasses In), dark paranormal romance (Lost Dynasties) and steamy British M/M stories (Bristol After Dark). Explore all three series and get notified when the next book lands.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Lucy Chivers | Romance Fiction",
-  description:
-    "Lucy Chivers writes intimate contemporary romance (Two Glasses In) and dark paranormal romance (Lost Dynasties). Explore both series and get notified when the next book lands.",
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Lucy Chivers",
+    locale: "en_GB",
+    title: "Lucy Chivers | Romance Fiction",
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lucy Chivers | Romance Fiction",
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -33,7 +55,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${displaySerif.variable} ${gothicDisplay.variable} ${bodySans.variable} h-full antialiased`}
+      className={`${displaySerif.variable} ${gothicDisplay.variable} ${playfairDisplay.variable} ${bodySans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-void text-parchment font-sans">
         <NavBar />

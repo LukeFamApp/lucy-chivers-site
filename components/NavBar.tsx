@@ -7,6 +7,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/#two-glasses-in", label: "Two Glasses In" },
   { href: "/#lost-dynasties", label: "Lost Dynasties" },
+  { href: "/#bristol-after-dark", label: "Bristol After Dark" },
   { href: "/about", label: "About" },
 ];
 
@@ -25,7 +26,7 @@ export default function NavBar() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-6 font-sans text-sm uppercase tracking-[0.15em] text-parchment-dim sm:flex">
+        <div className="hidden items-center gap-6 font-sans text-sm uppercase tracking-[0.15em] text-parchment-dim lg:flex">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className="hover:text-ember-light transition-colors">
               {link.label}
@@ -39,7 +40,7 @@ export default function NavBar() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 sm:hidden"
+          className="flex h-9 w-9 flex-col items-center justify-center gap-1.5 lg:hidden"
         >
           <span
             className={`block h-[2px] w-6 bg-parchment transition-transform ${open ? "translate-y-2 rotate-45" : ""}`}
@@ -53,7 +54,7 @@ export default function NavBar() {
 
       {/* Mobile menu panel */}
       {open && (
-        <div className="border-t border-wood-light/30 px-6 py-4 sm:hidden">
+        <div className="border-t border-wood-light/30 px-6 py-4 lg:hidden">
           <div className="flex flex-col gap-4 font-sans text-sm uppercase tracking-[0.15em] text-parchment-dim">
             {links.map((link) => (
               <Link
