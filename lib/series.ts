@@ -160,7 +160,7 @@ export const series: Series[] = [
         bookNumber: 5,
         coverImage: "/covers/two-glasses-in-5.jpg",
         bookWidthRem: 8.8,
-        asin: "[UNWRAPPED_ASIN]",
+        asin: "B0HNPBX3KQ",
         blurb: [
           "Twenty years married. One secret. And a birthday she will never forget.",
           "Ken Fletcher has never kept anything from his wife. Not in twenty years of marriage, and certainly not since the night Lucy asked him a question, two glasses in, that opened up their marriage and changed everything. But Lucy's birthday is coming, and Ken is planning the one fantasy she has only ever whispered. It needs Josh. It needs Emily and James. It needs careful planning, a little practice, and a promise that when the moment finally comes, Lucy will still be free to say no.",
@@ -254,7 +254,7 @@ export const series: Series[] = [
         bookNumber: 1,
         coverImage: "/covers/devil-in-the-detail.jpg",
         bookWidthRem: 8.8,
-        asin: "[DEVIL_ASIN]",
+        asin: "B0HP384C8J",
         relatedLink: { label: "Meet Josh first in Two Glasses In", href: "/#two-glasses-in" },
         blurb: [
           "Come as something you're not.",
