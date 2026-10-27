@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cinzel, Cormorant_Garamond, Karla, Playfair_Display } from "next/font/google";
 import NavBar from "@/components/NavBar";
+import TrafficSourceTracker from "@/components/TrafficSourceTracker";
 import "./globals.css";
 
 const displaySerif = Cormorant_Garamond({
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${displaySerif.variable} ${gothicDisplay.variable} ${playfairDisplay.variable} ${bodySans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-void text-parchment font-sans">
+        <TrafficSourceTracker />
         <NavBar />
         <main className="flex-1">{children}</main>
         <footer className="border-t border-wood-light/30 py-8">

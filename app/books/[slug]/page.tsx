@@ -3,7 +3,15 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import SignupForm from "@/components/SignupForm";
-import { allBooks, getBookBySlug, getBuyUrl, isComingSoon, type Book } from "@/lib/series";
+import BuyButtons from "@/components/BuyButtons";
+import {
+  allBooks,
+  getBookBySlug,
+  getBuyUrl,
+  getStoreBuyUrls,
+  isComingSoon,
+  type Book,
+} from "@/lib/series";
 
 export function generateStaticParams() {
   return allBooks().map((book) => ({ slug: book.slug }));
@@ -71,6 +79,8 @@ export default async function BookPage({
   const { series: s, book } = found;
   const { theme } = s;
   const buyUrl = getBuyUrl(book);
+  // Books with an ASIN get UK and US buttons; short-link-only books keep one button.
+  const storeUrls = getStoreBuyUrls(book);
   const comingSoon = isComingSoon(book);
 
   return (
@@ -170,7 +180,9 @@ export default async function BookPage({
               ))}
             </div>
 
-            {buyUrl ? (
+            {storeUrls ? (
+              <BuyButtons book={book} theme={theme} />
+            ) : buyUrl ? (
               <a
                 href={buyUrl}
                 target="_blank"

@@ -22,6 +22,12 @@ export interface Book {
   asin?: string;
   /** Full buy link, for books that use a short link instead of an ASIN. */
   amazonUrl?: string;
+  /**
+   * Amazon Attribution links for this book, per store and per traffic source.
+   * Copy each "Attribution tags" URL from the Amazon Ads console CSV. A missing
+   * entry falls back to the website tag, then to the plain product page.
+   */
+  attribution?: Partial<Record<Store, Partial<Record<TrafficSource, string>>>>;
   /** Path to the real cover image in public/covers/. Omitted for unannounced covers. */
   coverImage?: string;
   /** Width of the face-out cover on the shelf, in rem */
@@ -60,6 +66,44 @@ export interface Series {
 }
 
 const ASIN_RE = /^[A-Z0-9]{10}$/;
+
+/** The Amazon stores we show buy buttons for. */
+export type Store = "uk" | "us";
+
+/**
+ * Where the visitor came from. Bio links add ?from=tiktok or ?from=instagram;
+ * everyone else counts as "website".
+ */
+export type TrafficSource = "website" | "tiktok" | "instagram";
+
+export const TRAFFIC_SOURCES: TrafficSource[] = ["website", "tiktok", "instagram"];
+
+const STORE_DOMAIN: Record<Store, string> = {
+  uk: "https://www.amazon.co.uk",
+  us: "https://www.amazon.com",
+};
+
+export const STORE_LABEL: Record<Store, string> = {
+  uk: "Amazon UK",
+  us: "Amazon US",
+};
+
+/**
+ * Per-store buy links for a book with a real ASIN, using the Attribution tag for
+ * the visitor's traffic source where one exists. Returns undefined for books
+ * without an ASIN (those keep their single amazonUrl button).
+ */
+export function getStoreBuyUrls(
+  book: Book,
+  source: TrafficSource = "website",
+): Record<Store, string> | undefined {
+  if (!book.asin || !ASIN_RE.test(book.asin)) return undefined;
+  const pick = (store: Store) =>
+    book.attribution?.[store]?.[source] ??
+    book.attribution?.[store]?.website ??
+    `${STORE_DOMAIN[store]}/dp/${book.asin}`;
+  return { uk: pick("uk"), us: pick("us") };
+}
 
 /** The buy link for a book, or undefined if it has no real ASIN / link yet. */
 export function getBuyUrl(book: Book): string | undefined {
@@ -255,6 +299,25 @@ export const series: Series[] = [
         coverImage: "/covers/devil-in-the-detail.jpg",
         bookWidthRem: 8.8,
         asin: "B0HP384C8J",
+        // Amazon Attribution campaigns "Devil in the Detail – Halloween 2026", created 27 Oct 2026.
+        attribution: {
+          uk: {
+            website:
+              "https://www.amazon.co.uk/dp/B0HP384C8J?maas=maas_adg_0CEB60CB65CC2CF9610E296B9FFB93A2_afap_abs&ref_=aa_maas&tag=maas",
+            tiktok:
+              "https://www.amazon.co.uk/dp/B0HP384C8J?maas=maas_adg_5049A89EEBA29A94589F16686192281C_afap_abs&ref_=aa_maas&tag=maas",
+            instagram:
+              "https://www.amazon.co.uk/dp/B0HP384C8J?maas=maas_adg_D53B5D0AFE3D94FA10420EFC6672D991_afap_abs&ref_=aa_maas&tag=maas",
+          },
+          us: {
+            website:
+              "https://www.amazon.com/dp/B0HP384C8J?maas=maas_adg_568A46671A390156BDE1CE4A0A8D4A7B_afap_abs&ref_=aa_maas&tag=maas",
+            tiktok:
+              "https://www.amazon.com/dp/B0HP384C8J?maas=maas_adg_F77E2327046F3AA1EEAF2EE3BFE7DD53_afap_abs&ref_=aa_maas&tag=maas",
+            instagram:
+              "https://www.amazon.com/dp/B0HP384C8J?maas=maas_adg_0E91845F910B8E097B7296099CAACA55_afap_abs&ref_=aa_maas&tag=maas",
+          },
+        },
         relatedLink: { label: "Meet Josh first in Two Glasses In", href: "/#two-glasses-in" },
         blurb: [
           "Come as something you're not.",
